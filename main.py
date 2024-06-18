@@ -81,8 +81,7 @@ if __name__ == "__main__":
     image_urls = generate_images(scenes)
     
     for i, scene in enumerate(scenes):
-        image_url = image_urls[i] if i < len(image_urls) else "No image generated"
-        print(f"\nScene {i+1}: {scene}\nImage URL: {image_url}\n\n")
+        print(f"\nScene {i+1}: {scene}\nImage URL: {image_urls[i]}\n\n")
 
     # Save image URLs to JSON file
     with open("image_urls.json", "w") as file:
@@ -98,13 +97,13 @@ if __name__ == "__main__":
     script_output = get_text(script_prompt)
     script_scenes = extract_scenes(script_output[0])
     
-    # Format scenes
+    # Parse scenes into structured format
     parsed_scenes = [parse_scene(scene) for scene in script_scenes]
     
-    # Speakers
+    # Assign voices
     voices = assign_voices(parsed_scenes)
     
-    # Narrations
+    # Create narrations list
     narrations = []
     for scene in parsed_scenes:
         narration = " ".join([dialogue for speaker, dialogue in scene])
